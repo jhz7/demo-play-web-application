@@ -1,3 +1,3 @@
 # demo-play-web-application
 
-Demo web application using Scala Play Framework. It will be developed during YouTube Tutorial
+Demo web application using Scala Play Framework developed during YouTube Tutorial.

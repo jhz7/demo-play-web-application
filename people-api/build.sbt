@@ -1,4 +1,4 @@
-name := """employee-api"""
+name := """people-api"""
 organization := "jhz7"
 
 version := "1.0-SNAPSHOT"

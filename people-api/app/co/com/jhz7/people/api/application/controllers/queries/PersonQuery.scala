@@ -25,8 +25,8 @@ case class PersonQuery @Inject()( dependencies: Dependencies, controllerComponen
     dependencies.personPersistenceService
       .getPeople.run( dependencies )
       .fold(
-        error => ErrorService.generateErrorHttp( error ),
-        person => Ok( Json.toJson( person ) )
+        error  => ErrorService.generateErrorHttp( error ),
+        people => Ok( Json.toJson( people ) )
       ).runToFuture
   }
 }

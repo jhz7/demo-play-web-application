@@ -18,7 +18,7 @@ trait PersonTransformer {
       PersonDto(
         firstName  = registry.dsFirstName,
         lastName   = registry.dsLastName,
-        identifier = IdPerson( registry.cdIdentification )
+        identifier = registry.cdIdentification
       )
     ).toCustomEither
   }
@@ -27,12 +27,12 @@ trait PersonTransformer {
     (
       validateFirstName( dto.firstName),
       validateLastName( dto.lastName ),
-      validateId( dto.identifier.id )
+      validateId( dto.identifier )
     ).mapN( (_, _, _) =>
       PersonRegistry(
         dsFirstName = dto.firstName,
         dsLastName = dto.lastName,
-        cdIdentification = dto.identifier.id
+        cdIdentification = dto.identifier
       )
     ).toCustomEither
   }

@@ -1,6 +1,6 @@
 package co.com.jhz7.people.api.infraestructure.repositories
 
-import co.com.jhz7.people.api.infraestructure.repositories.registries.PeopleRegistry
+import co.com.jhz7.people.api.infraestructure.repositories.registries.PersonRegistry
 
 package object tables {
 
@@ -8,7 +8,7 @@ package object tables {
 
   val TB_People = TableQuery[TB_PEOPLE]
 
-  class TB_PEOPLE( tag: Tag ) extends Table[PeopleRegistry]( tag, "tb_people" ){
+  class TB_PEOPLE( tag: Tag ) extends Table[PersonRegistry]( tag, "tb_people" ){
 
     def dsFirstName = column[String]( "dsfirst_name" )
 
@@ -18,6 +18,6 @@ package object tables {
 
     def pk = primaryKey( "tb_people_pk", cdIdentification )
 
-    def * = ( cdIdentification, dsFirstName, dsLastName ) <> ( PeopleRegistry.tupled, PeopleRegistry.unapply )
+    def * = ( cdIdentification, dsFirstName, dsLastName ) <> ( PersonRegistry.tupled, PersonRegistry.unapply )
   }
 }

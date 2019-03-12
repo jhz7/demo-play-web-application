@@ -4,5 +4,5 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /query/all                           co.com.jhz7.people.api.application.controllers.queries.PersonController.getPeople
-GET     /query/:id                           co.com.jhz7.people.api.application.controllers.queries.PersonController.getPerson(id: String)
+GET     /query/all                           co.com.jhz7.people.api.application.controllers.queries.PersonQuery.getPeople
+GET     /query/:id                           co.com.jhz7.people.api.application.controllers.queries.PersonQuery.getPerson(id: String)

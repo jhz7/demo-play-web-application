@@ -3,7 +3,7 @@ package co.com.jhz7.people.api.infraestructure.repositories.transformers
 import akka.Done
 import co.com.jhz7.people.api.application._
 import co.com.jhz7.people.api.application.dtos.PersonDto
-import co.com.jhz7.people.api.domain.models.{ BUSINESS, ErrorMessage, IdPerson }
+import co.com.jhz7.people.api.domain.models.{ BUSINESS, ErrorMessage, IdPersonModel }
 import co.com.jhz7.people.api.infraestructure.repositories.registries.PersonRegistry
 import cats.implicits._
 

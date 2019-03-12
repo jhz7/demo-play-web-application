@@ -4,17 +4,17 @@ import akka.Done
 import cats.data.Reader
 import co.com.jhz7.people.api.application.dtos.PersonDto
 import co.com.jhz7.people.api.application.{ CustomEitherT, Dependencies }
-import co.com.jhz7.people.api.domain.models.IdPerson
+import co.com.jhz7.people.api.domain.models.IdPersonModel
 
 trait PersonPersistenceService {
 
-  def getPerson( id: IdPerson ): Reader[Dependencies, CustomEitherT[PersonDto]] = Reader {
+  def getPerson( id: IdPersonModel ): Reader[Dependencies, CustomEitherT[PersonDto]] = Reader {
     dependencies: Dependencies =>
       dependencies.repoPeople
         .getPersonById( id ).run( dependencies.databaseConfig )
   }
 
-  def deletePerson( id: IdPerson ): Reader[Dependencies, CustomEitherT[Done]] = Reader {
+  def deletePerson( id: IdPersonModel ): Reader[Dependencies, CustomEitherT[Done]] = Reader {
     dependencies: Dependencies =>
       dependencies.repoPeople
         .deletePersonById( id ).run( dependencies.databaseConfig )

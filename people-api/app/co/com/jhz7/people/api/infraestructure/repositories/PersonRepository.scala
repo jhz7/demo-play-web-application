@@ -6,7 +6,7 @@ import cats.implicits._
 import co.com.jhz7.people.api.application._
 import co.com.jhz7.people.api.application.dtos.PersonDto
 import co.com.jhz7.people.api.domain.contracts.PersonRepositoryBase
-import co.com.jhz7.people.api.domain.models.{ APPLICATION, ErrorMessage, IdPerson, TECHNICAL }
+import co.com.jhz7.people.api.domain.models.{ APPLICATION, ErrorMessage, IdPersonModel, TECHNICAL }
 import co.com.jhz7.people.api.infraestructure.repositories.tables._
 import co.com.jhz7.people.api.infraestructure.repositories.transformers.PersonTransformer
 import monix.eval.Task
@@ -17,7 +17,7 @@ import slick.jdbc.PostgresProfile.api._
 
 trait PersonRepository extends PersonRepositoryBase {
 
-  override def getPersonById( cdIdentification: IdPerson ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[PersonDto]] = Reader {
+  override def getPersonById( cdIdentification: IdPersonModel ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[PersonDto]] = Reader {
     dbConfig: DatabaseConfig[JdbcProfile] =>
       val sqlQuery = TB_People.filter ( _.cdIdentification === cdIdentification.id ).result
 
@@ -36,7 +36,7 @@ trait PersonRepository extends PersonRepositoryBase {
       }
   }
 
-  override def deletePersonById( cdIdentification: IdPerson ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Done]] = Reader {
+  override def deletePersonById( cdIdentification: IdPersonModel ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Done]] = Reader {
     dbConfig: DatabaseConfig[JdbcProfile] =>
       val sqlQuery = TB_People.filter ( _.cdIdentification === cdIdentification.id ).delete
 

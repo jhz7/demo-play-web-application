@@ -3,16 +3,16 @@ package co.com.jhz7.people.api.application.controllers.queries
 import co.com.jhz7.people.api.application._
 import co.com.jhz7.people.api.application.dtos.FormatsHttpDto._
 import co.com.jhz7.people.api.application.services.ErrorService
-import co.com.jhz7.people.api.domain.models.IdPerson
+import co.com.jhz7.people.api.domain.models.IdPersonModel
 import javax.inject.{ Inject, Singleton }
 import play.api.libs.json.Json
 import play.api.mvc.{ Action, AnyContent, BaseController, ControllerComponents }
 
 @Singleton
-case class PersonController @Inject()( dependencies: Dependencies, controllerComponents: ControllerComponents ) extends BaseController {
+case class PersonQuery @Inject()( dependencies: Dependencies, controllerComponents: ControllerComponents ) extends BaseController {
 
   def getPerson( id: String ): Action[AnyContent] = Action.async(parse.anyContent) { _ =>
-    val personId = IdPerson( id )
+    val personId = IdPersonModel( id )
     dependencies.personPersistenceService
       .getPerson( personId ).run( dependencies )
       .fold(

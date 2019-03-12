@@ -8,8 +8,8 @@ trait ErrorService {
 
   def generateUniqueErrorMessage( errors: List[ErrorMessage] ): ErrorMessage = {
     val typeError = defineType( errors )
-    val message = errors.map(_.message).mkString("- ")
-    ErrorMessage( typeError, message )
+    val message = errors.map(_.message).mkString("\n- ")
+    ErrorMessage( typeError, "- " + message )
   }
 
   def generateErrorHttp( error: ErrorMessage ): Result = {

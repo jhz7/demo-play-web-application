@@ -24,7 +24,7 @@ package object application {
     AlwaysAsyncExecution
   )
 
-  implicit class CustomValidatedNelToCustomEither[T]( val validated: CustomValidatedNel[T] ) {
+  implicit class CustomValidatedNelToCustomEither[T]( val validated: CustomValidatedNel[T] ) extends AnyVal {
     def toCustomEither: CustomEither[T] =
       validated.fold(
         nonEmptyListError => Left( ErrorService.generateUniqueErrorMessage( nonEmptyListError.toList ) ),
@@ -32,7 +32,7 @@ package object application {
       )
   }
 
-  implicit class CustomEitherFromSequence[T]( val seqCustomEither: Seq[CustomEither[T]] ) {
+  implicit class CustomEitherFromSequence[T]( val seqCustomEither: Seq[CustomEither[T]] ) extends AnyVal {
     def traverseCustomEitherSequence: CustomEither[List[T]] = {
       seqCustomEither.foldRight( Right( Nil ): CustomEither[List[T]] ) {
         ( value, acc ) => for ( xs <- acc.right; x <- value.right ) yield x :: xs
@@ -40,7 +40,7 @@ package object application {
     }
   }
 
-  implicit class CastToCustomEitherT[T]( val customEither: CustomEither[T] ) {
+  implicit class CastToCustomEitherT[T]( val customEither: CustomEither[T] ) extends AnyVal {
     def toCustomEitherT: CustomEitherT[T] = {
       EitherT.fromEither( customEither )
     }

@@ -7,7 +7,7 @@ import play.api.libs.json.{JsError, JsSuccess, Json, Reads}
 import play.api.mvc.{AnyContent, Request}
 
 trait CommandHelper {
-  implicit class ReqAsCustomEither( val request: Request[AnyContent] ){
+  implicit class ReqAsCustomEither( val request: Request[AnyContent] ) {
     def getDataAsEither[T]( implicit reads: Reads[T] ): CustomEither[T] = {
       request.body.asJson match {
         case Some( json ) => Json.fromJson[T]( json ) match {

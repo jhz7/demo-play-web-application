@@ -1,0 +1,11 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /query/users/all                           co.com.jhz7.people.api.application.controllers.queries.UsersQuery.getUsers
+GET     /query/users/:id                           co.com.jhz7.people.api.application.controllers.queries.UsersQuery.getUsers(id: String)
+
+POST    /command/delete-user                       co.com.jhz7.people.api.application.controllers.commands.DeleteUserCommand.execute
+POST    /command/save-user                         co.com.jhz7.people.api.application.controllers.commands.SaveUserCommand.execute

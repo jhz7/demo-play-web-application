@@ -17,7 +17,10 @@ case class PersonQuery @Inject()( dependencies: Dependencies, controllerComponen
       .getPerson( personId ).run( dependencies )
       .fold(
         error => ErrorService.generateErrorHttp( error ),
-        person => Ok( Json.toJson( person ) )
+        {
+          case Some(person) => Ok( Json.toJson( person ) )
+          case None         => NoContent
+        }
       ).runToFuture
   }
 
@@ -26,7 +29,10 @@ case class PersonQuery @Inject()( dependencies: Dependencies, controllerComponen
       .getPeople.run( dependencies )
       .fold(
         error  => ErrorService.generateErrorHttp( error ),
-        people => Ok( Json.toJson( people ) )
+        {
+          case Nil    => NoContent
+          case people => Ok( Json.toJson( people ) )
+        }
       ).runToFuture
   }
 }

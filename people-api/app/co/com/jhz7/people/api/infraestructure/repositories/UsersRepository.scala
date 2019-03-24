@@ -1,12 +1,11 @@
 package co.com.jhz7.people.api.infraestructure.repositories
 
-import akka.Done
 import cats.data.{ EitherT, Reader }
 import cats.implicits._
 import co.com.jhz7.people.api.application._
 import co.com.jhz7.people.api.application.dtos.PersonDto
 import co.com.jhz7.people.api.domain.contracts.PersonRepositoryBase
-import co.com.jhz7.people.api.domain.models.{ APPLICATION, ErrorMessage, IdPersonModel, TECHNICAL }
+import co.com.jhz7.people.api.domain.models.{ ErrorMessage, IdPersonModel, TECHNICAL }
 import co.com.jhz7.people.api.infraestructure.repositories.tables._
 import co.com.jhz7.people.api.infraestructure.repositories.transformers.PersonTransformer
 import monix.eval.Task
@@ -17,18 +16,14 @@ import slick.jdbc.PostgresProfile.api._
 
 trait PersonRepository extends PersonRepositoryBase {
 
-  override def getPersonById( cdIdentification: IdPersonModel ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[PersonDto]] = Reader {
+  override def getPersonById( cdIdentification: IdPersonModel ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Option[PersonDto]]] = Reader {
     dbConfig: DatabaseConfig[JdbcProfile] =>
       val sqlQuery = TB_People.filter ( _.cdIdentification === cdIdentification.id ).result
 
       EitherT {
         Task.fromFuture ( dbConfig.db.run ( sqlQuery ) )
-          .map ( result =>
-            result.headOption match {
-              case Some ( registry ) => PersonTransformer.registryToDto( registry )
-              case None              => ErrorMessage ( APPLICATION, "No se consultó el registro" ).asLeft
-            } )
-          .onErrorRecover [CustomEither[PersonDto]] {
+          .map ( result => result.headOption.map( user => PersonTransformer.registryToDto( user ) ).traverseCustomEitherOption )
+          .onErrorRecover [CustomEither[Option[PersonDto]]] {
             case error =>
               Logger.logger.error ( error.getMessage )
               ErrorMessage ( TECHNICAL, "Falló la consulta de persona por id" ).asLeft
@@ -36,14 +31,14 @@ trait PersonRepository extends PersonRepositoryBase {
       }
   }
 
-  override def deletePersonById( cdIdentification: IdPersonModel ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Done]] = Reader {
+  override def deletePersonById( cdIdentification: IdPersonModel ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Int]] = Reader {
     dbConfig: DatabaseConfig[JdbcProfile] =>
       val sqlQuery = TB_People.filter ( _.cdIdentification === cdIdentification.id ).delete
 
       EitherT {
         Task.fromFuture ( dbConfig.db.run ( sqlQuery ) )
-          .map ( _ => Done.asRight )
-          .onErrorRecover [CustomEither[Done]] {
+          .map ( _.asRight )
+          .onErrorRecover [CustomEither[Int]] {
             case error =>
               Logger.logger.error ( error.getMessage )
               ErrorMessage ( TECHNICAL, "Ocurrió un error al eliminar el registro de persona por id" ).asLeft
@@ -51,7 +46,7 @@ trait PersonRepository extends PersonRepositoryBase {
       }
   }
 
-  override def savePerson( personToSave: PersonDto ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Done]] = Reader {
+  override def savePerson( personToSave: PersonDto ): Reader[DatabaseConfig[JdbcProfile], CustomEitherT[Int]] = Reader {
     dbConfig: DatabaseConfig[JdbcProfile] =>
       import dbConfig.profile.api._
 
@@ -59,8 +54,8 @@ trait PersonRepository extends PersonRepositoryBase {
         .flatMap ( registryToSave =>
           EitherT {
             Task.fromFuture ( dbConfig.db.run ( TB_People.insertOrUpdate ( registryToSave ) ) )
-              .map ( _ => Done.asRight )
-              .onErrorRecover [CustomEither[Done]] {
+              .map ( _.asRight )
+              .onErrorRecover [CustomEither[Int]] {
                 case error =>
                   Logger.logger.error ( error.getMessage )
                   ErrorMessage ( TECHNICAL, "Ocurrió durante el guardado de los datos de persona" ).asLeft

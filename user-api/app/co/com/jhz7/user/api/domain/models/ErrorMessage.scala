@@ -4,7 +4,18 @@ final case class ErrorMessage( typeError: TypeError, message: String )
 
 sealed trait TypeError
 
-object APPLICATION extends TypeError
-object TECHNICAL   extends TypeError
-object BUSINESS    extends TypeError
-object UNKNOWN     extends TypeError
+object APPLICATION extends TypeError {
+  override def toString: String = "Error de tipo aplicación"
+}
+
+object TECHNICAL extends TypeError {
+  override def toString: String = "Error de tipo técnico"
+}
+
+object BUSINESS extends TypeError {
+  override def toString: String = "Error de tipo negocio"
+}
+
+object UNKNOWN extends TypeError {
+  override def toString: String = "Error de tipo desconocido"
+}

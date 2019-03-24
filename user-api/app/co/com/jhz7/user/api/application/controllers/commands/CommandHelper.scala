@@ -1,8 +1,8 @@
-package co.com.jhz7.people.api.application.controllers.commands
+package co.com.jhz7.user.api.application.controllers.commands
 
 import cats.implicits._
-import co.com.jhz7.people.api.application.CustomEither
-import co.com.jhz7.people.api.domain.models.{APPLICATION, ErrorMessage}
+import co.com.jhz7.user.api.application.CustomEither
+import co.com.jhz7.user.api.domain.models.{APPLICATION, ErrorMessage}
 import play.api.libs.json.{JsError, JsSuccess, Json, Reads}
 import play.api.mvc.{AnyContent, Request}
 

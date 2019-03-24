@@ -1,13 +1,13 @@
-package co.com.jhz7.people.api.infraestructure.repositories
+package co.com.jhz7.user.api.infraestructure.repositories
 
 import cats.data.{ EitherT, Reader }
 import cats.implicits._
-import co.com.jhz7.people.api.application._
-import co.com.jhz7.people.api.application.dtos.UserDto
-import co.com.jhz7.people.api.domain.contracts.UsersRepositoryBase
-import co.com.jhz7.people.api.domain.models.{ ErrorMessage, UserIdModel, TECHNICAL }
-import co.com.jhz7.people.api.infraestructure.repositories.tables._
-import co.com.jhz7.people.api.infraestructure.repositories.transformers.UserTransformer
+import co.com.jhz7.user.api.application._
+import co.com.jhz7.user.api.application.dtos.UserDto
+import co.com.jhz7.user.api.domain.contracts.UsersRepositoryBase
+import co.com.jhz7.user.api.domain.models.{ ErrorMessage, UserIdModel, TECHNICAL }
+import co.com.jhz7.user.api.infraestructure.repositories.tables._
+import co.com.jhz7.user.api.infraestructure.repositories.transformers.UserTransformer
 import monix.eval.Task
 import play.api.Logger
 import slick.basic.DatabaseConfig

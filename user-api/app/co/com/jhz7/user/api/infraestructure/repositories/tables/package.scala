@@ -1,6 +1,6 @@
-package co.com.jhz7.people.api.infraestructure.repositories
+package co.com.jhz7.user.api.infraestructure.repositories
 
-import co.com.jhz7.people.api.infraestructure.repositories.registries.UserRegistry
+import co.com.jhz7.user.api.infraestructure.repositories.registries.UserRegistry
 
 package object tables {
 

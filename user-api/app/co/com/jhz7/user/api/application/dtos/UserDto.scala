@@ -1,4 +1,4 @@
-package co.com.jhz7.people.api.application.dtos
+package co.com.jhz7.user.api.application.dtos
 
 case class UserDto(
   firstName:  String,

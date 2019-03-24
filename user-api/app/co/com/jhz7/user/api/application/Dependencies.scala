@@ -1,9 +1,9 @@
-package co.com.jhz7.people.api.application
+package co.com.jhz7.user.api.application
 
-import co.com.jhz7.people.api.application.services.UsersPersistenceService
-import co.com.jhz7.people.api.domain.contracts.UsersRepositoryBase
-import co.com.jhz7.people.api.infraestructure.DataBaseConfig
-import co.com.jhz7.people.api.infraestructure.repositories.UsersRepository
+import co.com.jhz7.user.api.application.services.UsersPersistenceService
+import co.com.jhz7.user.api.domain.contracts.UsersRepositoryBase
+import co.com.jhz7.user.api.infraestructure.DataBaseConfig
+import co.com.jhz7.user.api.infraestructure.repositories.UsersRepository
 import javax.inject.{ Inject, Singleton }
 import play.api.Configuration
 import play.api.libs.ws.WSClient

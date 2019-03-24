@@ -1,9 +1,9 @@
-package co.com.jhz7.people.api.application.controllers.queries
+package co.com.jhz7.user.api.application.controllers.queries
 
-import co.com.jhz7.people.api.application._
-import co.com.jhz7.people.api.application.dtos.FormatsHttpDto._
-import co.com.jhz7.people.api.application.services.ErrorService
-import co.com.jhz7.people.api.domain.models.UserIdModel
+import co.com.jhz7.user.api.application._
+import co.com.jhz7.user.api.application.dtos.FormatsHttpDto._
+import co.com.jhz7.user.api.application.services.ErrorService
+import co.com.jhz7.user.api.domain.models.UserIdModel
 import javax.inject.{ Inject, Singleton }
 import play.api.libs.json.Json
 import play.api.mvc.{ Action, AnyContent, BaseController, ControllerComponents }

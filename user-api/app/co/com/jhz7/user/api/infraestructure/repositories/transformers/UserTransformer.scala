@@ -1,11 +1,11 @@
-package co.com.jhz7.people.api.infraestructure.repositories.transformers
+package co.com.jhz7.user.api.infraestructure.repositories.transformers
 
 import akka.Done
 import cats.implicits._
-import co.com.jhz7.people.api.application._
-import co.com.jhz7.people.api.application.dtos.UserDto
-import co.com.jhz7.people.api.domain.models.{ BUSINESS, ErrorMessage }
-import co.com.jhz7.people.api.infraestructure.repositories.registries.UserRegistry
+import co.com.jhz7.user.api.application._
+import co.com.jhz7.user.api.application.dtos.UserDto
+import co.com.jhz7.user.api.domain.models.{ BUSINESS, ErrorMessage }
+import co.com.jhz7.user.api.infraestructure.repositories.registries.UserRegistry
 
 trait UserTransformer {
 

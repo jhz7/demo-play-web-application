@@ -1,10 +1,10 @@
-package co.com.jhz7.people.api.application.controllers.commands
+package co.com.jhz7.user.api.application.controllers.commands
 
-import co.com.jhz7.people.api.application.{Dependencies, _}
-import co.com.jhz7.people.api.application.dtos.FormatsHttpDto._
-import co.com.jhz7.people.api.application.dtos.{UserIdDto, SuccessResponseDto}
-import co.com.jhz7.people.api.application.services.ErrorService
-import co.com.jhz7.people.api.domain.models.UserIdModel
+import co.com.jhz7.user.api.application.{Dependencies, _}
+import co.com.jhz7.user.api.application.dtos.FormatsHttpDto._
+import co.com.jhz7.user.api.application.dtos.{UserIdDto, SuccessResponseDto}
+import co.com.jhz7.user.api.application.services.ErrorService
+import co.com.jhz7.user.api.domain.models.UserIdModel
 import javax.inject.{Inject, Singleton}
 import org.joda.time.DateTime
 import play.api.libs.json.Json

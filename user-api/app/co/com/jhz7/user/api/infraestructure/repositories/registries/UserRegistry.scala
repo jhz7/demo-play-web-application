@@ -1,4 +1,4 @@
-package co.com.jhz7.people.api.infraestructure.repositories.registries
+package co.com.jhz7.user.api.infraestructure.repositories.registries
 
 final case class UserRegistry(
   cdIdentification: String,

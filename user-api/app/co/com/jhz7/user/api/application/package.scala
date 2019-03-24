@@ -1,10 +1,10 @@
-package co.com.jhz7.people.api
+package co.com.jhz7.user.api
 
 import java.util.concurrent.Executors
 
 import cats.data.{ EitherT, ValidatedNel }
-import co.com.jhz7.people.api.application.services.ErrorService
-import co.com.jhz7.people.api.domain.models.ErrorMessage
+import co.com.jhz7.user.api.application.services.ErrorService
+import co.com.jhz7.user.api.domain.models.ErrorMessage
 import monix.eval.Task
 import monix.execution.ExecutionModel.AlwaysAsyncExecution
 import monix.execution.UncaughtExceptionReporter

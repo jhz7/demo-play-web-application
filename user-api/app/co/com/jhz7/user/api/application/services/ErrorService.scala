@@ -1,6 +1,6 @@
-package co.com.jhz7.people.api.application.services
+package co.com.jhz7.user.api.application.services
 
-import co.com.jhz7.people.api.domain.models._
+import co.com.jhz7.user.api.domain.models._
 import play.api.mvc.Result
 import play.api.mvc.Results.{ BadRequest, InternalServerError }
 

@@ -1,4 +1,4 @@
-package co.com.jhz7.people.api.infraestructure
+package co.com.jhz7.user.api.infraestructure
 
 import com.typesafe.config.{ Config, ConfigFactory }
 import play.api.Logger
@@ -7,7 +7,7 @@ import slick.jdbc.JdbcProfile
 
 object DataBaseConfig {
 
-  val dbConfigPostgres: DatabaseConfig[JdbcProfile] = getDataBaseConfiguration( configuration = "people-api" )
+  val dbConfigPostgres: DatabaseConfig[JdbcProfile] = getDataBaseConfiguration( configuration = "user-api" )
 
   private def getDataBaseConfiguration( configuration: String ): DatabaseConfig[JdbcProfile] = {
     val config: Config = ConfigFactory.load()

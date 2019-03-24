@@ -1,9 +1,9 @@
-package co.com.jhz7.people.api.domain.contracts
+package co.com.jhz7.user.api.domain.contracts
 
 import cats.data.Reader
-import co.com.jhz7.people.api.application.CustomEitherT
-import co.com.jhz7.people.api.application.dtos.UserDto
-import co.com.jhz7.people.api.domain.models.UserIdModel
+import co.com.jhz7.user.api.application.CustomEitherT
+import co.com.jhz7.user.api.application.dtos.UserDto
+import co.com.jhz7.user.api.domain.models.UserIdModel
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
 

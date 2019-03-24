@@ -1,4 +1,4 @@
-package co.com.jhz7.people.api.domain.models
+package co.com.jhz7.user.api.domain.models
 
 final case class ErrorMessage( typeError: TypeError, message: String )
 

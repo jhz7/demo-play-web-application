@@ -1,11 +1,11 @@
-package co.com.jhz7.people.api.application.services
+package co.com.jhz7.user.api.application.services
 
 import akka.Done
 import cats.data.Reader
 import cats.implicits._
-import co.com.jhz7.people.api.application.dtos.UserDto
-import co.com.jhz7.people.api.application.{ CustomEitherT, Dependencies }
-import co.com.jhz7.people.api.domain.models.{ APPLICATION, ErrorMessage, UserIdModel }
+import co.com.jhz7.user.api.application.dtos.UserDto
+import co.com.jhz7.user.api.application.{ CustomEitherT, Dependencies }
+import co.com.jhz7.user.api.domain.models.{ APPLICATION, ErrorMessage, UserIdModel }
 
 trait UsersPersistenceService {
 

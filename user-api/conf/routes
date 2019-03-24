@@ -4,8 +4,8 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /query/users/all                           co.com.jhz7.people.api.application.controllers.queries.UsersQuery.getUsers
-GET     /query/users/:id                           co.com.jhz7.people.api.application.controllers.queries.UsersQuery.getUsers(id: String)
+GET     /query/users/all                           co.com.jhz7.user.api.application.controllers.queries.UsersQuery.getUsers
+GET     /query/users/:id                           co.com.jhz7.user.api.application.controllers.queries.UsersQuery.getUser(id: String)
 
-POST    /command/delete-user                       co.com.jhz7.people.api.application.controllers.commands.DeleteUserCommand.execute
-POST    /command/save-user                         co.com.jhz7.people.api.application.controllers.commands.SaveUserCommand.execute
+POST    /command/delete-user                       co.com.jhz7.user.api.application.controllers.commands.DeleteUserCommand.execute
+POST    /command/save-user                         co.com.jhz7.user.api.application.controllers.commands.SaveUserCommand.execute

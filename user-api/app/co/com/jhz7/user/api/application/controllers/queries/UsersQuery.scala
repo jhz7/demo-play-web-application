@@ -18,7 +18,7 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
       .getUser( personId ).run( dependencies )
       .fold(
         error => {
-          Logger.logger.error( error.typeError.toString + error.message )
+          Logger.logger.error( error.errorType.toString + error.message )
           ErrorService.generateErrorHttp( error )
         },
         {
@@ -33,7 +33,7 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
       .getUsers.run( dependencies )
       .fold(
         error  => {
-          Logger.logger.error( error.typeError.toString + error.message )
+          Logger.logger.error( error.errorType.toString + error.message )
           ErrorService.generateErrorHttp( error )
         },
         {

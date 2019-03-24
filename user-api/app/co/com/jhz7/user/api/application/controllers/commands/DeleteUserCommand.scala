@@ -20,7 +20,7 @@ case class DeleteUserCommand @Inject()( dependencies: Dependencies, controllerCo
         .flatMap{ userIdDto => dependencies.usersPersistenceService.deleteUser( UserIdModel( userIdDto.id ) ).run( dependencies ) }
         .fold(
           error => {
-            Logger.logger.error( error.typeError.toString + error.message )
+            Logger.logger.error( error.errorType.toString + error.message )
             ErrorService.generateErrorHttp( error )
           },
           _ => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Los datos del usuario fueron eliminados con éxito" ) ) )

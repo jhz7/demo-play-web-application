@@ -7,20 +7,20 @@ import play.api.mvc.Results.{ BadRequest, InternalServerError }
 trait ErrorService {
 
   def generateUniqueErrorMessage( errors: List[ErrorMessage] ): ErrorMessage = {
-    val typeError = defineType( errors )
+    val typeError = defineErrorType( errors )
     val message = errors.map(_.message).mkString("\n- ")
     ErrorMessage( typeError, "- " + message )
   }
 
   def generateErrorHttp( error: ErrorMessage ): Result = {
-    error.typeError match {
+    error.errorType match {
       case BUSINESS => BadRequest( error.message )
       case _        => InternalServerError( error.message )
     }
   }
 
-  private[services] def defineType( errors: List[ErrorMessage] ): TypeError = {
-    val errorTypes = errors.map( _.typeError )
+  private[services] def defineErrorType( errors: List[ErrorMessage] ): ErrorType = {
+    val errorTypes = errors.map( _.errorType )
     ( errorTypes.contains( BUSINESS ), errorTypes.contains( APPLICATION ), errorTypes.contains( TECHNICAL ) ) match {
       case ( true, _, _ ) => BUSINESS
       case ( _, true, _ ) => APPLICATION

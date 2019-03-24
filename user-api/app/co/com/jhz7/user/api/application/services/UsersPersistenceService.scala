@@ -4,8 +4,9 @@ import akka.Done
 import cats.data.Reader
 import cats.implicits._
 import co.com.jhz7.user.api.application.dtos.UserDto
-import co.com.jhz7.user.api.application.{ CustomEitherT, Dependencies }
+import co.com.jhz7.user.api.application._
 import co.com.jhz7.user.api.domain.models.{ APPLICATION, ErrorMessage, UserIdModel }
+import co.com.jhz7.user.api.domain.services.ValidateUserService
 
 trait UsersPersistenceService {
 
@@ -25,14 +26,17 @@ trait UsersPersistenceService {
         }
   }
 
-  def saveUser( personToSave: UserDto ): Reader[Dependencies, CustomEitherT[Done]] = Reader {
+  def saveUser( userToSave: UserDto ): Reader[Dependencies, CustomEitherT[Done]] = Reader {
     dependencies: Dependencies =>
-      dependencies.repoUsers
-        .saveUser ( personToSave ).run ( dependencies.databaseConfig )
-        .subflatMap { modifiedRegistriesAmount =>
-          if ( modifiedRegistriesAmount > 0 ) Done.asRight
-          else ErrorMessage ( APPLICATION, "No se guardaron los datos para el usuario. " ).asLeft
-        }
+      ValidateUserService.validateUser( userToSave ).toCustomEitherT
+        .flatMap( _ =>
+          dependencies.repoUsers
+            .saveUser ( userToSave ).run ( dependencies.databaseConfig )
+            .subflatMap { modifiedRegistriesAmount =>
+              if ( modifiedRegistriesAmount > 0 ) Done.asRight
+              else ErrorMessage ( APPLICATION, "No se guardaron los datos para el usuario. " ).asLeft
+            }
+        )
   }
 
   def getUsers: Reader[Dependencies, CustomEitherT[List[UserDto]]] = Reader {

@@ -19,7 +19,7 @@ case class SaveUserCommand @Inject()( dependencies: Dependencies, controllerComp
         .flatMap{ userDto => dependencies.usersPersistenceService.saveUser( userDto ).run( dependencies ) }
         .fold(
           error => {
-            Logger.logger.error( error.typeError.toString + error.message )
+            Logger.logger.error( error.errorType.toString + error.message )
             ErrorService.generateErrorHttp( error )
           },
           _ => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Datos guardados con éxito" ) ) )

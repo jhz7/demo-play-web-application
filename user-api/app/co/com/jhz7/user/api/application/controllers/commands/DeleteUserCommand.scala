@@ -1,6 +1,6 @@
 package co.com.jhz7.user.api.application.controllers.commands
 
-import co.com.jhz7.user.api.application.{ Dependencies, _ }
+import co.com.jhz7.user.api.application._
 import co.com.jhz7.user.api.application.dtos.FormatsHttpDto._
 import co.com.jhz7.user.api.application.dtos.{ SuccessResponseDto, UserIdDto }
 import co.com.jhz7.user.api.application.services.ErrorService
@@ -23,7 +23,7 @@ case class DeleteUserCommand @Inject()( dependencies: Dependencies, controllerCo
             Logger.logger.error( error.typeError.toString + error.message )
             ErrorService.generateErrorHttp( error )
           },
-          _     => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Los datos del usuario fueron eliminados con éxito" ) ) )
+          _ => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Los datos del usuario fueron eliminados con éxito" ) ) )
         ).runToFuture
   }
 }

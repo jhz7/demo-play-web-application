@@ -22,7 +22,7 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
           ErrorService.generateErrorHttp( error )
         },
         {
-          case Some(user) => Ok( Json.toJson( user ) )
+          case Some( user ) => Ok( Json.toJson( user ) )
           case None         => NoContent
         }
       ).runToFuture
@@ -37,7 +37,7 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
           ErrorService.generateErrorHttp( error )
         },
         {
-          case Nil    => NoContent
+          case Nil   => NoContent
           case users => Ok( Json.toJson( users ) )
         }
       ).runToFuture

@@ -1,6 +1,6 @@
 package co.com.jhz7.user.api.application.controllers.commands
 
-import co.com.jhz7.user.api.application.{ Dependencies, _ }
+import co.com.jhz7.user.api.application._
 import co.com.jhz7.user.api.application.dtos.FormatsHttpDto._
 import co.com.jhz7.user.api.application.dtos.{ SuccessResponseDto, UserDto }
 import co.com.jhz7.user.api.application.services.ErrorService
@@ -22,7 +22,7 @@ case class SaveUserCommand @Inject()( dependencies: Dependencies, controllerComp
             Logger.logger.error( error.typeError.toString + error.message )
             ErrorService.generateErrorHttp( error )
           },
-          _     => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Datos guardados con éxito" ) ) )
+          _ => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Datos guardados con éxito" ) ) )
         ).runToFuture
   }
 }

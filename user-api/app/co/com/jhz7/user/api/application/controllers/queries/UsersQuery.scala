@@ -5,6 +5,7 @@ import co.com.jhz7.user.api.application.dtos.FormatsHttpDto._
 import co.com.jhz7.user.api.application.services.ErrorService
 import co.com.jhz7.user.api.domain.models.UserIdModel
 import javax.inject.{ Inject, Singleton }
+import play.api.Logger
 import play.api.libs.json.Json
 import play.api.mvc.{ Action, AnyContent, BaseController, ControllerComponents }
 
@@ -16,7 +17,10 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
     dependencies.usersPersistenceService
       .getUser( personId ).run( dependencies )
       .fold(
-        error => ErrorService.generateErrorHttp( error ),
+        error => {
+          Logger.logger.error( error.typeError.toString + error.message )
+          ErrorService.generateErrorHttp( error )
+        },
         {
           case Some(user) => Ok( Json.toJson( user ) )
           case None         => NoContent
@@ -28,7 +32,10 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
     dependencies.usersPersistenceService
       .getUsers.run( dependencies )
       .fold(
-        error  => ErrorService.generateErrorHttp( error ),
+        error  => {
+          Logger.logger.error( error.typeError.toString + error.message )
+          ErrorService.generateErrorHttp( error )
+        },
         {
           case Nil    => NoContent
           case users => Ok( Json.toJson( users ) )

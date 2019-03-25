@@ -22,7 +22,7 @@ trait UsersPersistenceService {
         .deleteUserById ( id ).run ( dependencies.databaseConfig )
         .subflatMap { modifiedRegistriesAmount =>
           if ( modifiedRegistriesAmount > 0 ) Done.asRight
-          else ErrorMessage ( APPLICATION, s"El usuario con identificación ${id.id} no existe y por lo tanto, no se eliminó información. " ).asLeft
+          else ErrorMessage ( APPLICATION, s"No se eliminó información del usuario con identificación ${id.id}. " ).asLeft
         }
   }
 

@@ -19,7 +19,7 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
       .fold(
         error => {
           Logger.logger.error( error.errorType.toString + error.message )
-          ErrorService.generateErrorHttp( error )
+          ErrorService.generateHttpError( error )
         },
         {
           case Some( user ) => Ok( Json.toJson( user ) )
@@ -34,7 +34,7 @@ case class UsersQuery @Inject()( dependencies: Dependencies, controllerComponent
       .fold(
         error  => {
           Logger.logger.error( error.errorType.toString + error.message )
-          ErrorService.generateErrorHttp( error )
+          ErrorService.generateHttpError( error )
         },
         {
           case Nil   => NoContent

@@ -12,10 +12,10 @@ trait ErrorService {
     ErrorMessage( typeError, "- " + message )
   }
 
-  def generateErrorHttp( error: ErrorMessage ): Result = {
+  def generateHttpError( error: ErrorMessage ): Result = {
     error.errorType match {
-      case BUSINESS => BadRequest( error.message )
-      case _        => InternalServerError( error.message )
+      case BUSINESS | APPLICATION => BadRequest( error.message )
+      case _                      => InternalServerError( error.message )
     }
   }
 

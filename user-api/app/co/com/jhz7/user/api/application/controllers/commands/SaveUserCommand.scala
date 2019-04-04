@@ -20,7 +20,7 @@ case class SaveUserCommand @Inject()( dependencies: Dependencies, controllerComp
         .fold(
           error => {
             Logger.logger.error( error.errorType.toString + error.message )
-            ErrorService.generateErrorHttp( error )
+            ErrorService.generateHttpError( error )
           },
           _ => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Datos guardados con éxito" ) ) )
         ).runToFuture

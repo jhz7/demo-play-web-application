@@ -21,7 +21,7 @@ case class DeleteUserCommand @Inject()( dependencies: Dependencies, controllerCo
         .fold(
           error => {
             Logger.logger.error( error.errorType.toString + error.message )
-            ErrorService.generateErrorHttp( error )
+            ErrorService.generateHttpError( error )
           },
           _ => Ok( Json.toJson( SuccessResponseDto( date = new DateTime(), message = "Los datos del usuario fueron eliminados con éxito" ) ) )
         ).runToFuture
